@@ -1,5 +1,3 @@
-
-import { userService } from '../services/user.service.js'
 import { UserMsg } from "./UserMsg.jsx"
 import { LoginSignup } from './LoginSignup.jsx'
 import { logout } from  '../store/actions/user.actions.js'
@@ -28,7 +26,6 @@ export function AppHeader() {
                 <h1>React Todo App</h1>
                 {user ? (
                     < section >
-
                         <Link to={`/user/${user._id}`}>Hello {user.fullname}</Link>
                         <button onClick={onLogout}>Logout</button>
                     </ section >

@@ -2,6 +2,7 @@ import {todoService } from '../../services/todo.service.js'
 import { setLoading } from './loading.actions.js'
 import {ADD_TODO, REMOVE_TODO , SET_TODOS , UPDATE_TODO} from '../reducers/todo.reducer.js'
 import { store } from '../store.js'
+import { incUserBalance } from './user.actions.js'
 
 export function loadTodos(){
     setLoading(true)
@@ -20,7 +21,15 @@ export function removeTodo(todoId){
         .catch(err => errorHandler(err,'remove todo', 'Cannot remove todo'))
 }
 
-export function saveTodo(todo){
+export async function saveTodo(todo){
+    if(todo._id){
+        const oldTodo = await todoService.get(todo._id)
+        const currentUser= await store.getState().userModule.loggedInUser
+        
+        if(!oldTodo.isDone && todo.isDone && currentUser){
+            incUserBalance(currentUser._id)
+        }
+    }
     const type = todo._id ? UPDATE_TODO : ADD_TODO
     return todoService.save(todo)
         .then( (savedTodo)=>{

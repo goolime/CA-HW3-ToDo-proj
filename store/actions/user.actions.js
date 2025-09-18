@@ -1,5 +1,5 @@
 import { userService } from "../../services/user.service.js"
-import { SET_USER } from "../reducers/user.reducer.js"
+import { SET_USER, INC_BALANCE_USER } from "../reducers/user.reducer.js"
 import {store} from '../store.js'
 
 export function login(credentials){
@@ -24,6 +24,13 @@ export function logout(){
             store.dispatch({type: SET_USER, user:null})
         })
         .catch(err=>errorHandler(err,'logout','Cannot logout'))
+}
+
+export function incUserBalance(userId){
+    return userService.incBalance(userId)
+        .then(()=>
+            store.dispatch({type: INC_BALANCE_USER, userId})
+        )
 }
 
 function errorHandler (err,action, msg){

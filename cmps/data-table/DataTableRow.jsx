@@ -4,6 +4,7 @@ const { Link } = ReactRouterDOM
 export function DataTableRow({ todo, onRemoveTodo }) {
 
     const [isExpanded, setIsExpanded] = useState(false)
+    const style={'backgroundColor': todo.color}
 
     return <Fragment>
         <tr>
@@ -20,8 +21,8 @@ export function DataTableRow({ todo, onRemoveTodo }) {
                 <Link to={`/todo/edit/${todo._id}`}>Edit</Link>
             </td>
         </tr>
-        <tr hidden={!isExpanded}>
-            <td colSpan="5" className="todo-info">
+        <tr hidden={!isExpanded} >
+            <td colSpan="5" className="todo-info" style={style}>
                 <h5>{todo.txt}</h5>
                 <img src={`https://robohash.org/${todo._id}`} style={{ maxWidth: '50px' }} />
                 <p>{todo.txt}s are best for lorem ipsum dolor</p>

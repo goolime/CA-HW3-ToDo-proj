@@ -1,23 +1,31 @@
 import { todoService } from "../services/todo.service.js"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
+import { store } from '../store/store.js'
+import { loadTodos, saveTodo } from "../store/actions/todos.actions.js" 
 
 const { useState, useEffect } = React
 const { useNavigate, useParams } = ReactRouterDOM
+const { useSelector } = ReactRedux
 
 export function TodoEdit() {
 
     const [todoToEdit, setTodoToEdit] = useState(todoService.getEmptyTodo())
     const navigate = useNavigate()
     const params = useParams()
+    const isLoading = useSelector(storeState => storeState.loadingModule.loading)
+    
 
     useEffect(() => {
         if (params.todoId) loadTodo()
     }, [])
 
     function loadTodo() {
-        todoService.get(params.todoId)
-            .then(setTodoToEdit)
-            .catch(err => console.log('err:', err))
+        loadTodos()
+            .then(()=>{
+                const todo =store.getState().todoModule.todos
+                    .find(todo=>todo._id===params.todoId)
+                setTodoToEdit(todo)
+        })
     }
 
     function handleChange({ target }) {
@@ -43,7 +51,7 @@ export function TodoEdit() {
 
     function onSaveTodo(ev) {
         ev.preventDefault()
-        todoService.save(todoToEdit)
+        saveTodo(todoToEdit)
             .then((savedTodo) => {
                 navigate('/todo')
                 showSuccessMsg(`Todo Saved (id: ${savedTodo._id})`)
@@ -54,8 +62,9 @@ export function TodoEdit() {
             })
     }
 
-    const { txt, importance, isDone } = todoToEdit
+    if (isLoading) return <div>loading...</div>
 
+    const { txt, importance, isDone } = todoToEdit
     return (
         <section className="todo-edit">
             <form onSubmit={onSaveTodo} >

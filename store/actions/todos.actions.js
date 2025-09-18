@@ -1,12 +1,15 @@
 import {todoService } from '../../services/todo.service.js'
+import { setLoading } from './loading.actions.js'
 import {ADD_TODO, REMOVE_TODO , SET_TODOS , UPDATE_TODO} from '../reducers/todo.reducer.js'
 import { store } from '../store.js'
 
 export function loadTodos(){
+    setLoading(true)
     const storeState = store.getState() 
     return todoService.query(storeState.filterModule.filterby)
         .then( todos => {
             store.dispatch({type:SET_TODOS, todos}) 
+            setLoading(false)
         })
         .catch(err => errorHandler(err,'load todos', 'Cannot load todos'))
 }

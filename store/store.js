@@ -1,13 +1,15 @@
 import { userReducer } from "./reducers/user.reducer.js"
 import { todosReducer } from './reducers/todo.reducer.js'
 import { filterByReducer } from "./reducers/filterBy.reducer.js"
+import { loadingReducer } from './reducers/loading.reducer.js'
 
 const { createStore, combineReducers, compose } = Redux
 
 const rootReducer = combineReducers({
     userModule: userReducer,
     todoModule: todosReducer,
-    filterModule: filterByReducer
+    filterModule: filterByReducer,
+    loadingModule: loadingReducer
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose

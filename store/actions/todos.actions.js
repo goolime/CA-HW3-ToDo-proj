@@ -9,8 +9,8 @@ export function loadTodos(){
     return todoService.query(storeState.filterModule.filterby)
         .then( todos => {
             store.dispatch({type:SET_TODOS, todos}) 
-            setLoading(false)
         })
+        .finally(()=> setLoading(false))
         .catch(err => errorHandler(err,'load todos', 'Cannot load todos'))
 }
 

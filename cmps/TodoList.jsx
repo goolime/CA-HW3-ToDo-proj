@@ -5,8 +5,9 @@ export function TodoList({ todos, onRemoveTodo, onToggleTodo }) {
 
     return (
         <ul className="todo-list">
-            {todos.map(todo =>
-                <li key={todo._id}>
+            {todos.map(todo =>{
+                const style={'background-color': todo.color}
+                return <li key={todo._id} style={style}>
                     <TodoPreview todo={todo} onToggleTodo={()=>onToggleTodo(todo)} />
                     <section>
                         <button onClick={() => onRemoveTodo(todo._id)}>Remove</button>
@@ -14,6 +15,7 @@ export function TodoList({ todos, onRemoveTodo, onToggleTodo }) {
                         <button><Link to={`/todo/edit/${todo._id}`}>Edit</Link></button>
                     </section>
                 </li>
+            }
             )}
         </ul>
     )

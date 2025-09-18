@@ -2,6 +2,7 @@ import { UserMsg } from "./UserMsg.jsx"
 import { LoginSignup } from './LoginSignup.jsx'
 import { logout } from  '../store/actions/user.actions.js'
 import { showErrorMsg } from '../services/event-bus.service.js'
+import { UserIneraction } from './UserInteraction.jsx'
 
 const { Link, NavLink } = ReactRouterDOM
 const { useNavigate } = ReactRouter
@@ -42,6 +43,7 @@ export function AppHeader() {
                 </nav>
             </section>
             <UserMsg />
+            <UserIneraction />
         </header>
     )
 }

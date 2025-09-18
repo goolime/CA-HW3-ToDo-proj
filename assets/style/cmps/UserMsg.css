@@ -8,6 +8,7 @@
     font-weight: bold;
     border: 3px solid black;
     border-radius: 2px;
+    z-index: 999999999;
 }
 
 .user-msg.success {
@@ -18,8 +19,22 @@
     background-color: var(--clr2);
 }
 
+.user-msg.normal {
+    color: black ;
+}
+
 
 .user-msg button{
     float: right;
     margin: 1em;
+}
+
+.user-msg-backdrop {
+  background: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999999998;
 }

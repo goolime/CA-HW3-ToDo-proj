@@ -67,7 +67,9 @@ export function TodoEdit() {
 
                 <label htmlFor="isDone">isDone:</label>
                 <input onChange={handleChange} checked={todoToEdit.isDone} value={isDone} type="checkbox" name="isDone" id="isDone" />
-
+                
+                <label htmlFor="color">Color:</label>
+                <input onChange={handleChange} type="color" id="favcolor" name="color" value={todoToEdit.color}></input>
 
                 <button>Save</button>
             </form>

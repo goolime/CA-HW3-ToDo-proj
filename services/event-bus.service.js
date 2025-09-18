@@ -20,6 +20,10 @@ function createEventEmitter() {
 
 export const eventBusService = createEventEmitter()
 
+export function showUserInteraction(msg){
+    eventBusService.emit('show-user-interaction', msg)
+}
+
 export function showUserMsg(msg) {
     eventBusService.emit('show-user-msg', msg)
 }

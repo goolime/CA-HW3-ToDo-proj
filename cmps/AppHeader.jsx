@@ -1,6 +1,6 @@
 import { UserMsg } from "./UserMsg.jsx"
 import { LoginSignup } from './LoginSignup.jsx'
-import { logout } from  '../store/actions/user.actions.js'
+import { getUser, logout, isUserLoggedIn, getUserStyle } from  '../store/actions/user.actions.js'
 import { showErrorMsg } from '../services/event-bus.service.js'
 import { UserIneraction } from './UserInteraction.jsx'
 
@@ -20,9 +20,11 @@ export function AppHeader() {
         navigate('/')
     }
 
+    const style= getUserStyle()
+
     
     return (
-        <header className="app-header full main-layout">
+        <header className="app-header full main-layout" style={style}>
             <section className="header-container">
                 <h1>React Todo App</h1>
                 {user ? (

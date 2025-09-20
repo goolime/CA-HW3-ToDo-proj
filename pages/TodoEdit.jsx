@@ -59,6 +59,7 @@ export function TodoEdit() {
             .catch(err => {
                 showErrorMsg('Cannot save todo')
                 console.log('err:', err)
+                throw err
             })
     }
 
